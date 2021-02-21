@@ -1,9 +1,7 @@
 package main
 
 import "fmt"
-
-func main() {
-	//mapS := map[string]string{}
+func test11(){
 	mapS := make(map[string]string)
 	mapS["name"] = "zxd"
 	mapS["sex"] = "female"
@@ -17,5 +15,23 @@ func main() {
 	for k, v := range mapS {
 		fmt.Printf("%s:%s\n", k, v)
 	}
+
+}
+func test12(){
+	mapS := make(map[int]int)
+	go func() {
+		_=mapS[1]
+	}()
+	go func() {
+		mapS[2]=1
+	}()
+	select {
+
+	}
+
+}
+func main() {
+	x:=make(chan int ,10)
+	x<-1
 
 }

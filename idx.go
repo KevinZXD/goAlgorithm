@@ -76,6 +76,12 @@ func test4() {
 	a = 0
 	defer calc("2", a, calc("20", a, b))
 	b = 1
+	panic(1)
+}
+func test12() {
+	defer println(1)
+	defer println(2)
+	panic(4)
 }
 
 //break只能退出一层循环。channel关闭后可以读，不可以写
@@ -125,7 +131,7 @@ type People interface {
 }
 type Student struct{}
 
-func (stu *Student) Speak(think string) (talk string) {
+func (stu Student) Speak(think string) (talk string) {
 	if think == "learning" {
 		talk = "You are a good boy"
 	} else {
@@ -136,17 +142,34 @@ func (stu *Student) Speak(think string) (talk string) {
 
 //接口实现 Student类型没有实现Speak方法。*Student类型才实现
 func test7() {
-	var peo = Student{}
+	var peo People = &Student{}
 	think := "learning"
 	fmt.Println(peo.Speak(think))
 }
 
+func test8() {
+
+	type Books struct {
+		title   string
+		author  string
+		subject string
+		book_id int
+	}
+
+	book := Books{"Go 语言", "www.runoob.com", "Go 语言教程", 6495407}
+
+	// 创建一个新的结构体
+	fmt.Println(book.title)
+	fmt.Println(&book.title)
+
+}
 func main() {
-	test1()
-	test2()
-	test3()
-	test4()
+	//test1()
+	//test2()
+	//test3()
+	//test4()
 	//test5()
-	test6()
-	test7()
+	//test6()
+	//test7()
+	test12()
 }
