@@ -45,14 +45,14 @@ func test14() {
 
 	for {
 		wg.Add(2)
-		go func(wg *sync.WaitGroup) {
+		go func() {
 			println(1)
 			defer wg.Done()
-		}(wg)
-		go func(wg *sync.WaitGroup) {
+		}()
+		go func() {
 			println(2)
 			defer wg.Done()
-		}(wg)
+		}()
 		wg.Wait()
 	}
 
@@ -60,6 +60,6 @@ func test14() {
 
 }
 func main() {
-	test13()
+	test14()
 
 }

@@ -11,9 +11,11 @@ func test11(){
 	}else{
 		println("not exist")
 	}
-	delete(mapS,"name")
+
 	for k, v := range mapS {
+		delete(mapS,"name")
 		fmt.Printf("%s:%s\n", k, v)
+
 	}
 
 }
@@ -25,13 +27,12 @@ func test12(){
 	go func() {
 		mapS[2]=1
 	}()
-	select {
-
-	}
+	//select {
+	//
+	//}
 
 }
 func main() {
-	x:=make(chan int ,10)
-	x<-1
+	test11()
 
 }

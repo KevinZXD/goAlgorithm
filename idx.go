@@ -17,25 +17,29 @@ func test1() {
 	}
 	stus[2].Age += 222
 	for _, stu := range stus {
-		m[stu.Name] = &stu
+		fmt.Println(&stu)
+		fmt.Println(1111111)
+		m[stu.Name] = &stu // for range 过程中的k,v 公用不能直接做引用传递,否则有问题
 	}
 	for k, v := range m {
 		fmt.Println(k, *v)
 	}
 }
 
-// 会编译不成功，map的value不能寻址
+// 会编译不成功，map的value不能寻址 又因为map是指针传递，无法直接修改其中的值
 func test2() {
-	var m = map[string]*student{}
-	m["zhou"] = &student{
+	var m = map[string]student{}
+	m["zhou"] = student{
 		Name: "zhou",
 		Age:  24,
 	}
-	m["zhou"].Age += 1
+	z := m["zhou"]
+	z.Age += 1
 	x := student{Name: "sdf", Age: 55}
 	x.Age = 8
 	fmt.Println(m["zhou"].Age)
 	fmt.Println(x.Age)
+	fmt.Println(z.Age)
 }
 
 type People1 struct{}
@@ -78,11 +82,7 @@ func test4() {
 	b = 1
 	panic(1)
 }
-func test12() {
-	defer println(1)
-	defer println(2)
-	panic(4)
-}
+
 
 //break只能退出一层循环。channel关闭后可以读，不可以写
 func test5() {
@@ -163,6 +163,12 @@ func test8() {
 	fmt.Println(&book.title)
 
 }
+
+func test15() {
+	defer println(1)
+	defer println(2)
+	panic(4)
+}
 func main() {
 	//test1()
 	//test2()
@@ -171,5 +177,7 @@ func main() {
 	//test5()
 	//test6()
 	//test7()
-	test12()
+	//test8()
+	test11()
+	//test15()
 }
